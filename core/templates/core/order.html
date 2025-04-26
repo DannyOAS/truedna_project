@@ -1,0 +1,164 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<section style="text-align: center; padding-bottom: 2rem;">
+    <h2>Order Your DNA Test Kit</h2>
+    <p>Complete the form below to order your {{ kit_type_display }} kit.</p>
+</section>
+
+<div class="two-column">
+    <div>
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <h3 class="card-title">{{ kit_type_display }}</h3>
+                <p class="card-text">{% if kit_type == 'peace-of-mind' %}
+                For personal knowledge only. Discreet testing with 99.99% accuracy.
+                {% else %}
+                Court-admissible results with chain-of-custody documentation.
+                {% endif %}</p>
+                <div style="font-size: 1.25rem; font-weight: 700; color: var(--primary); margin: 1rem 0;">
+                    {% if kit_type == 'peace-of-mind' %}
+                    GHS 450
+                    {% else %}
+                    GHS 850
+                    {% endif %}
+                </div>
+                <ul style="padding-left: 1.25rem; margin-bottom: 1.5rem;">
+                    <li>Results in 3-5 days</li>
+                    <li>Secure online results</li>
+                    <li>ISO-certified laboratory</li>
+                    {% if kit_type == 'legal-dna' %}
+                    <li>Court-admissible documentation</li>
+                    <li>Chain of custody verification</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        
+        <div style="background-color: var(--gray-100); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem;">
+            <h4 style="margin-top: 0;">Need Assistance?</h4>
+            <p>Our team is available to help with your order.</p>
+            <p>Call: +233 XXXXXXXX<br>
+            WhatsApp: <a href="https://wa.me/233XXXXXXXXX">Chat Now</a></p>
+        </div>
+    </div>
+    
+    <div>
+        <form method="post" action="{% url 'submit_order' %}" class="order-form">
+            {% csrf_token %}
+            <input type="hidden" name="kit_type" value="{{ kit_type }}">
+            
+            <div class="form-group">
+                <label for="full_name" class="form-label">Full Name</label>
+                <input type="text" id="full_name" name="full_name" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address" class="form-label">Delivery Address</label>
+                <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="city" class="form-label">City</label>
+                <input type="text" id="city" name="city" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="participants" class="form-label">Number of Test Participants</label>
+                <select id="participants" name="participants" class="form-control" required>
+                    <option value="2">2 people (standard paternity test)</option>
+                    <option value="3">3 people (including mother)</option>
+                    <option value="4">4 people</option>
+                    <option value="custom">More than 4 people</option>
+                </select>
+            </div>
+            
+            <div id="customParticipants" class="form-group" style="display: none;">
+                <label for="custom_participants" class="form-label">Specify Number of Participants</label>
+                <input type="number" id="custom_participants" name="custom_participants" min="5" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="payment_method" class="form-label">Payment Method</label>
+                <select id="payment_method" name="payment_method" class="form-control" required>
+                    <option value="mobile_money">Mobile Money</option>
+                    <option value="bank_transfer">Bank Transfer</option>
+                    <option value="cash_delivery">Cash on Delivery</option>
+                </select>
+            </div>
+            
+            <div id="mobileMoneyDetails" class="form-group">
+                <label for="mobile_money_provider" class="form-label">Mobile Money Provider</label>
+                <select id="mobile_money_provider" name="mobile_money_provider" class="form-control">
+                    <option value="mtn">MTN Mobile Money</option>
+                    <option value="vodafone">Vodafone Cash</option>
+                    <option value="airteltigo">AirtelTigo Money</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="special_instructions" class="form-label">Special Instructions (Optional)</label>
+                <textarea id="special_instructions" name="special_instructions" class="form-control" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-checkbox">
+                    <input type="checkbox" name="privacy_consent" required>
+                    <span>I agree to the <a href="/terms/">Terms and Conditions</a> and <a href="/privacy/">Privacy Policy</a></span>
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-checkbox">
+                    <input type="checkbox" name="testing_consent" required>
+                    <span>I confirm I have the legal right to collect DNA samples from all participants</span>
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Place Order</button>
+        </form>
+        
+        <p style="margin-top: 1.5rem; font-size: 0.875rem; color: var(--light-text);">
+            Your privacy is our priority. All orders are processed with complete confidentiality.
+        </p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const participantsSelect = document.getElementById('participants');
+        const customParticipantsDiv = document.getElementById('customParticipants');
+        const customParticipantsInput = document.getElementById('custom_participants');
+        
+        participantsSelect.addEventListener('change', function() {
+            if (this.value === 'custom') {
+                customParticipantsDiv.style.display = 'block';
+                customParticipantsInput.setAttribute('required', 'required');
+            } else {
+                customParticipantsDiv.style.display = 'none';
+                customParticipantsInput.removeAttribute('required');
+            }
+        });
+        
+        const paymentMethodSelect = document.getElementById('payment_method');
+        const mobileMoneyDetailsDiv = document.getElementById('mobileMoneyDetails');
+        
+        paymentMethodSelect.addEventListener('change', function() {
+            if (this.value === 'mobile_money') {
+                mobileMoneyDetailsDiv.style.display = 'block';
+            } else {
+                mobileMoneyDetailsDiv.style.display = 'none';
+            }
+        });
+    });
+</script>
+{% endblock %}
