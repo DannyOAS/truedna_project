@@ -1,40 +1,37 @@
 {% extends 'core/base.html' %}
 {% block content %}
 <section style="text-align: center; padding-bottom: 3rem;">
-    <h2>Order Your DNA Test Kit</h2>
-    <p>Complete the form below to order your {{ kit_type_display }} kit.</p>
+    <h2>Order Your Peace of Mind DNA Test Kit</h2>
+    <p>Complete your order for our discreet, personal-use paternity test.</p>
 </section>
 
 <div class="two-column">
     <div>
         <div class="card" style="margin-bottom: 2.5rem; padding: 2rem;">
-            <h3 class="card-title">{{ kit_type_display }}</h3>
-            <p class="card-text">{% if kit_type == 'peace-of-mind' %}
-            For personal knowledge only. Discreet testing with 99.99% accuracy.
-            {% else %}
-            Court-admissible results with chain-of-custody documentation.
-            {% endif %}</p>
+            <h3 class="card-title">Peace of Mind Kit</h3>
+            <p class="card-text">For personal knowledge only. Our most discreet testing option with 99.99% accuracy.</p>
             <div style="font-size: 2.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 1.5rem 0;">
-                {% if kit_type == 'peace-of-mind' %}
                 GHS 450
-                {% else %}
-                GHS 850
-                {% endif %}
             </div>
             <ul style="padding-left: 1.25rem; margin-bottom: 1.5rem; color: var(--gray-600);">
                 <li>Results in 3-5 days</li>
                 <li>Secure online results</li>
                 <li>ISO-certified laboratory</li>
-                {% if kit_type == 'legal-dna' %}
-                <li>Court-admissible documentation</li>
-                <li>Chain of custody verification</li>
-                {% endif %}
+                <li>Discreet, unmarked packaging</li>
+                <li>Simple at-home sample collection</li>
+                <li>Privacy guaranteed</li>
             </ul>
         </div>
         
         <div style="background-color: var(--gray-50); padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
+            <h4 style="margin-top: 0; color: var(--dark);">Why Choose the Peace of Mind Kit?</h4>
+            <p>Our Peace of Mind test is perfect when you need answers for personal knowledge only. This discreet test allows you to confirm paternity without anyone else knowing.</p>
+            <p>The entire process can be handled privately, from the discreet packaging to the confidential online results.</p>
+        </div>
+        
+        <div style="background-color: var(--gray-50); padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
             <h4 style="margin-top: 0; color: var(--dark);">Need Assistance?</h4>
-            <p>Our team is available to help with your order.</p>
+            <p>Our team is ready to help with your order.</p>
             <div style="display: flex; align-items: center; margin-top: 1.5rem;">
                 <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--primary-gradient); display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +51,7 @@
                 </div>
                 <div>
                     <div style="font-weight: 600; color: var(--dark);">WhatsApp</div>
-                    <div><a href="https://wa.me/233XXXXXXXXX">Chat Now</a></div>
+                    <div><a href="https://wa.me/233XXXXXXXXX" style="color: var(--primary); font-weight: 500;">Chat Now</a></div>
                 </div>
             </div>
         </div>
@@ -64,7 +61,7 @@
         <div class="card" style="padding: 2.5rem;">
             <form method="post" action="{% url 'submit_order' %}" class="order-form">
                 {% csrf_token %}
-                <input type="hidden" name="kit_type" value="{{ kit_type }}">
+                <input type="hidden" name="kit_type" value="peace-of-mind">
                 
                 <div class="form-group">
                     <label for="full_name" class="form-label">Full Name</label>
@@ -145,9 +142,17 @@
                 
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Place Order</button>
             </form>
-            
-            <p style="margin-top: 1.5rem; font-size: 0.875rem; color: var(--gray-500); text-align: center;">
-                Your privacy is our priority. All orders are processed with complete confidentiality.
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--gray-50); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+            <h4 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem; color: var(--dark);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-1-5h2v2h-2v-2zm0-8h2v6h-2V7z" fill="var(--primary)"/>
+                </svg>
+                Your Privacy Guarantee
+            </h4>
+            <p style="margin-bottom: 0; color: var(--gray-600);">
+                All orders are processed with complete confidentiality. Your kit will arrive in unmarked packaging with no indication of the contents.
             </p>
         </div>
     </div>

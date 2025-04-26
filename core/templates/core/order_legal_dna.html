@@ -1,40 +1,55 @@
 {% extends 'core/base.html' %}
 {% block content %}
 <section style="text-align: center; padding-bottom: 3rem;">
-    <h2>Order Your DNA Test Kit</h2>
-    <p>Complete the form below to order your {{ kit_type_display }} kit.</p>
+    <h2>Order Your Legal DNA Test Kit</h2>
+    <p>Complete your order for our court-admissible DNA test with chain-of-custody documentation.</p>
 </section>
 
 <div class="two-column">
     <div>
         <div class="card" style="margin-bottom: 2.5rem; padding: 2rem;">
-            <h3 class="card-title">{{ kit_type_display }}</h3>
-            <p class="card-text">{% if kit_type == 'peace-of-mind' %}
-            For personal knowledge only. Discreet testing with 99.99% accuracy.
-            {% else %}
-            Court-admissible results with chain-of-custody documentation.
-            {% endif %}</p>
+            <h3 class="card-title">Legal DNA Kit</h3>
+            <p class="card-text">Court-admissible results with chain-of-custody documentation. Valid for legal proceedings.</p>
             <div style="font-size: 2.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 1.5rem 0;">
-                {% if kit_type == 'peace-of-mind' %}
-                GHS 450
-                {% else %}
                 GHS 850
-                {% endif %}
             </div>
             <ul style="padding-left: 1.25rem; margin-bottom: 1.5rem; color: var(--gray-600);">
                 <li>Results in 3-5 days</li>
-                <li>Secure online results</li>
-                <li>ISO-certified laboratory</li>
-                {% if kit_type == 'legal-dna' %}
                 <li>Court-admissible documentation</li>
                 <li>Chain of custody verification</li>
-                {% endif %}
+                <li>ISO-certified laboratory</li>
+                <li>Witnessed sample collection</li>
+                <li>Official laboratory certification</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: var(--gray-50); padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
+            <h4 style="margin-top: 0; color: var(--dark);">Why Choose the Legal DNA Kit?</h4>
+            <p>Our Legal DNA test follows strict chain-of-custody procedures required by courts, government agencies, and immigration offices.</p>
+            <p>This test is necessary for legal matters including:</p>
+            <ul style="padding-left: 1.25rem; margin-bottom: 0; color: var(--gray-600);">
+                <li>Child support cases</li>
+                <li>Child custody disputes</li>
+                <li>Birth certificate amendments</li>
+                <li>Immigration applications</li>
+                <li>Inheritance claims</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: var(--gray-50); padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
+            <h4 style="margin-top: 0; color: var(--dark);">Special Requirements</h4>
+            <p>For Legal DNA testing, all participants must:</p>
+            <ul style="padding-left: 1.25rem; margin-bottom: 0; color: var(--gray-600);">
+                <li>Present valid government-issued photo ID</li>
+                <li>Be photographed during sample collection</li>
+                <li>Sign legal documentation</li>
+                <li>Have samples collected by our certified collector</li>
             </ul>
         </div>
         
         <div style="background-color: var(--gray-50); padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
             <h4 style="margin-top: 0; color: var(--dark);">Need Assistance?</h4>
-            <p>Our team is available to help with your order.</p>
+            <p>Our legal support team is available to help with your order and answer any questions.</p>
             <div style="display: flex; align-items: center; margin-top: 1.5rem;">
                 <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--primary-gradient); display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +69,7 @@
                 </div>
                 <div>
                     <div style="font-weight: 600; color: var(--dark);">WhatsApp</div>
-                    <div><a href="https://wa.me/233XXXXXXXXX">Chat Now</a></div>
+                    <div><a href="https://wa.me/233XXXXXXXXX" style="color: var(--primary); font-weight: 500;">Chat Now</a></div>
                 </div>
             </div>
         </div>
@@ -64,7 +79,7 @@
         <div class="card" style="padding: 2.5rem;">
             <form method="post" action="{% url 'submit_order' %}" class="order-form">
                 {% csrf_token %}
-                <input type="hidden" name="kit_type" value="{{ kit_type }}">
+                <input type="hidden" name="kit_type" value="legal-dna">
                 
                 <div class="form-group">
                     <label for="full_name" class="form-label">Full Name</label>
@@ -82,13 +97,43 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="address" class="form-label">Delivery Address</label>
-                    <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
+                    <label for="testing_location" class="form-label">Preferred Testing Location</label>
+                    <select id="testing_location" name="testing_location" class="form-control" required>
+                        <option value="">Select a location</option>
+                        <option value="accra_office">Accra Office</option>
+                        <option value="kumasi_office">Kumasi Office</option>
+                        <option value="takoradi_office">Takoradi Office</option>
+                        <option value="tamale_office">Tamale Office</option>
+                        <option value="home_visit">Home/Office Visit (Additional fee applies)</option>
+                    </select>
+                </div>
+                
+                <div id="homeVisitAddress" class="form-group" style="display: none;">
+                    <label for="address" class="form-label">Visit Address</label>
+                    <textarea id="address" name="address" class="form-control" rows="3"></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label for="city" class="form-label">City</label>
                     <input type="text" id="city" name="city" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="test_reason" class="form-label">Purpose of Test</label>
+                    <select id="test_reason" name="test_reason" class="form-control" required>
+                        <option value="">Select a purpose</option>
+                        <option value="child_support">Child Support</option>
+                        <option value="custody">Child Custody</option>
+                        <option value="birth_certificate">Birth Certificate Amendment</option>
+                        <option value="immigration">Immigration</option>
+                        <option value="inheritance">Inheritance</option>
+                        <option value="other">Other Legal Purpose</option>
+                    </select>
+                </div>
+                
+                <div id="otherPurpose" class="form-group" style="display: none;">
+                    <label for="other_purpose" class="form-label">Specify Purpose</label>
+                    <input type="text" id="other_purpose" name="other_purpose" class="form-control">
                 </div>
                 
                 <div class="form-group">
@@ -107,11 +152,16 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="preferred_date" class="form-label">Preferred Testing Date</label>
+                    <input type="date" id="preferred_date" name="preferred_date" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
                     <label for="payment_method" class="form-label">Payment Method</label>
                     <select id="payment_method" name="payment_method" class="form-control" required>
                         <option value="mobile_money">Mobile Money</option>
                         <option value="bank_transfer">Bank Transfer</option>
-                        <option value="cash_delivery">Cash on Delivery</option>
+                        <option value="cash_payment">Cash Payment at Appointment</option>
                     </select>
                 </div>
                 
@@ -139,15 +189,23 @@
                 <div class="form-group">
                     <label class="form-checkbox">
                         <input type="checkbox" name="testing_consent" required>
-                        <span>I confirm I have the legal right to collect DNA samples from all participants</span>
+                        <span>I understand that all participants must provide valid ID and consent to testing</span>
                     </label>
                 </div>
                 
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Place Order</button>
             </form>
-            
-            <p style="margin-top: 1.5rem; font-size: 0.875rem; color: var(--gray-500); text-align: center;">
-                Your privacy is our priority. All orders are processed with complete confidentiality.
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--gray-50); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+            <h4 style="margin-top: 0; display: flex; align-items: center; gap: 0.5rem; color: var(--dark);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-1-5h2v2h-2v-2zm0-8h2v6h-2V7z" fill="var(--primary)"/>
+                </svg>
+                Next Steps After Ordering
+            </h4>
+            <p style="margin-bottom: 0; color: var(--gray-600);">
+                After placing your order, our team will contact you within 24 hours to confirm your appointment and provide instructions for all participants.
             </p>
         </div>
     </div>
@@ -177,6 +235,34 @@
                 mobileMoneyDetailsDiv.style.display = 'block';
             } else {
                 mobileMoneyDetailsDiv.style.display = 'none';
+            }
+        });
+        
+        const testingLocationSelect = document.getElementById('testing_location');
+        const homeVisitAddressDiv = document.getElementById('homeVisitAddress');
+        const addressInput = document.getElementById('address');
+        
+        testingLocationSelect.addEventListener('change', function() {
+            if (this.value === 'home_visit') {
+                homeVisitAddressDiv.style.display = 'block';
+                addressInput.setAttribute('required', 'required');
+            } else {
+                homeVisitAddressDiv.style.display = 'none';
+                addressInput.removeAttribute('required');
+            }
+        });
+        
+        const testReasonSelect = document.getElementById('test_reason');
+        const otherPurposeDiv = document.getElementById('otherPurpose');
+        const otherPurposeInput = document.getElementById('other_purpose');
+        
+        testReasonSelect.addEventListener('change', function() {
+            if (this.value === 'other') {
+                otherPurposeDiv.style.display = 'block';
+                otherPurposeInput.setAttribute('required', 'required');
+            } else {
+                otherPurposeDiv.style.display = 'none';
+                otherPurposeInput.removeAttribute('required');
             }
         });
     });
