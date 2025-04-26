@@ -20,7 +20,7 @@
                     </div>
                     <div>
                         <div style="font-weight: 600; color: var(--dark); font-size: 1.1rem;">Email</div>
-                        <div style="color: var(--gray-600);">support@truedna.com</div>
+                        <div style="color: var(--gray-600);">{{ company_email }}</div>
                     </div>
                 </div>
                 
@@ -32,7 +32,7 @@
                     </div>
                     <div>
                         <div style="font-weight: 600; color: var(--dark); font-size: 1.1rem;">Phone</div>
-                        <div style="color: var(--gray-600);">+233 XXXXXXXX</div>
+                        <div style="color: var(--gray-600);">{{ company_phone }}</div>
                     </div>
                 </div>
                 
@@ -44,7 +44,7 @@
                     </div>
                     <div>
                         <div style="font-weight: 600; color: var(--dark); font-size: 1.1rem;">WhatsApp</div>
-                        <div><a href="https://wa.me/233XXXXXXXXX" style="color: var(--primary); font-weight: 500;">Chat Now</a></div>
+                        <div><a href="https://wa.me/{{ company_whatsapp }}" style="color: var(--primary); font-weight: 500;">Chat Now</a></div>
                     </div>
                 </div>
             </div>
@@ -53,15 +53,15 @@
                 <h3>Business Hours</h3>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--gray-600);">
                     <div>Monday - Friday</div>
-                    <div style="font-weight: 500; color: var(--dark);">8:00 AM - 6:00 PM</div>
+                    <div style="font-weight: 500; color: var(--dark);">{{ business_hours.monday_friday }}</div>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--gray-600);">
                     <div>Saturday</div>
-                    <div style="font-weight: 500; color: var(--dark);">9:00 AM - 3:00 PM</div>
+                    <div style="font-weight: 500; color: var(--dark);">{{ business_hours.saturday }}</div>
                 </div>
                 <div style="display: flex; justify-content: space-between; color: var(--gray-600);">
                     <div>Sunday</div>
-                    <div style="font-weight: 500; color: var(--dark);">Closed</div>
+                    <div style="font-weight: 500; color: var(--dark);">{{ business_hours.sunday }}</div>
                 </div>
             </div>
         </div>

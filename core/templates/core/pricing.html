@@ -8,7 +8,7 @@
 <div class="pricing-cards">
     <div class="pricing-card">
         <h3 class="pricing-card-title">Peace of Mind Kit</h3>
-        <div class="pricing-card-price">GHS 450</div>
+        <div class="pricing-card-price">{{ pricing.peace_of_mind_display }}</div>
         <ul class="pricing-card-features">
             <li>99.99% Accurate Results</li>
             <li>Discreet Testing Process</li>
@@ -22,7 +22,7 @@
     <div class="pricing-card" style="position: relative;">
         <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--primary-gradient); color: white; padding: 0.5rem 1.5rem; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700; box-shadow: var(--shadow);">MOST POPULAR</div>
         <h3 class="pricing-card-title">Legal DNA Kit</h3>
-        <div class="pricing-card-price">GHS 850</div>
+        <div class="pricing-card-price">{{ pricing.legal_dna_display }}</div>
         <ul class="pricing-card-features">
             <li>Court-Admissible Results</li>
             <li>Chain of Custody Documentation</li>
@@ -65,7 +65,7 @@
     <p>Our team is available to guide you through the selection process.</p>
     <div style="margin-top: 2rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
         <a href="/contact/" class="btn btn-outline">Contact Us</a>
-        <a href="https://wa.me/233XXXXXXXXX" class="btn btn-outline">Chat on WhatsApp</a>
+        <a href="https://wa.me/{{ company_whatsapp }}" class="btn btn-outline">Chat on WhatsApp</a>
     </div>
 </section>
 {% endblock %}

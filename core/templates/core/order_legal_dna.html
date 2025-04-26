@@ -11,8 +11,8 @@
             <h3 class="card-title">Legal DNA Kit</h3>
             <p class="card-text">Court-admissible results with chain-of-custody documentation. Valid for legal proceedings.</p>
             <div style="font-size: 2.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 1.5rem 0;">
-                GHS 850
-            </div>
+    {{ pricing.legal_dna_display }}
+</div>
             <ul style="padding-left: 1.25rem; margin-bottom: 1.5rem; color: var(--gray-600);">
                 <li>Results in 3-5 days</li>
                 <li>Court-admissible documentation</li>
@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <div style="font-weight: 600; color: var(--dark);">Call Us</div>
-                    <div>+233 XXXXXXXX</div>
+                    <div>{{ company_phone }}</div>
                 </div>
             </div>
             <div style="display: flex; align-items: center; margin-top: 1rem;">
@@ -69,7 +69,7 @@
                 </div>
                 <div>
                     <div style="font-weight: 600; color: var(--dark);">WhatsApp</div>
-                    <div><a href="https://wa.me/233XXXXXXXXX" style="color: var(--primary); font-weight: 500;">Chat Now</a></div>
+                    <div><a href="https://wa.me/{{ company_whatsapp }}" style="color: var(--primary); font-weight: 500;">Chat Now</a></div>
                 </div>
             </div>
         </div>

@@ -843,3 +843,11 @@ textarea.form-control {
     padding: 1.5rem;
   }
 }
+/* Add this to your existing CSS file */
+nav a.active {
+    color: var(--primary);
+}
+
+nav a.active::after {
+    width: 100%;
+}

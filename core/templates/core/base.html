@@ -18,14 +18,13 @@
 <body>
     <header>
         <div class="container">
-            <h1><a href="/">TrueDNA</a></h1>
-            <nav>
-                <a href="/how-it-works/">How It Works</a>
-                <a href="/pricing/">Pricing</a>
-                <a href="/faq/">FAQ</a>
-                <a href="/testimonials/">Testimonials</a>
-                <a href="/contact/">Contact</a>
-            </nav>
+<!--            <h1><a href="/">TrueDNA</a></h1>-->
+            <h1><a href="/">{{ site_name }}</a></h1>
+          <nav>
+            {% for item in nav_items %}
+              <a href="/{{ item.url }}" {% if item.active %}class="active"{% endif %}>{{ item.label }}</a>
+            {% endfor %}
+          </nav>
         </div>
     </header>
 
@@ -37,11 +36,12 @@
 
     <footer>
         <div class="container">
-            <p>TrueDNA Ghana - Discreet DNA Testing. Real Peace of Mind.</p>
+<!--            <p>TrueDNA Ghana - Discreet DNA Testing. Real Peace of Mind.</p>-->
+            <p>{{ site_name }} Ghana - {{ site_tagline }}</p>
             <div class="footer-links">
-                <a href="/privacy/">Privacy Policy</a>
-                <a href="/terms/">Terms of Service</a>
-                <a href="/contact/">Contact Us</a>
+              {% for link in footer_links %}
+              <a href="/{{ link.url }}">{{ link.label }}</a>
+              {% endfor %}
             </div>
         </div>
     </footer>

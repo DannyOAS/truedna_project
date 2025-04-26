@@ -15,12 +15,12 @@
             Court-admissible results with chain-of-custody documentation.
             {% endif %}</p>
             <div style="font-size: 2.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 1.5rem 0;">
-                {% if kit_type == 'peace-of-mind' %}
-                GHS 450
-                {% else %}
-                GHS 850
-                {% endif %}
-            </div>
+    {% if kit_type == \'peace-of-mind\' %}
+    {{ pricing.peace_of_mind_display }}
+    {% else %}
+    {{ pricing.legal_dna_display }}
+    {% endif %}
+</div>
             <ul style="padding-left: 1.25rem; margin-bottom: 1.5rem; color: var(--gray-600);">
                 <li>Results in 3-5 days</li>
                 <li>Secure online results</li>
@@ -43,7 +43,7 @@
                 </div>
                 <div>
                     <div style="font-weight: 600; color: var(--dark);">Call Us</div>
-                    <div>+233 XXXXXXXX</div>
+                    <div>{{ company_phone }}</div>
                 </div>
             </div>
             <div style="display: flex; align-items: center; margin-top: 1rem;">
@@ -54,7 +54,7 @@
                 </div>
                 <div>
                     <div style="font-weight: 600; color: var(--dark);">WhatsApp</div>
-                    <div><a href="https://wa.me/233XXXXXXXXX">Chat Now</a></div>
+                    <div><a href="https://wa.me/{{ company_whatsapp }}">Chat Now</a></div>
                 </div>
             </div>
         </div>
